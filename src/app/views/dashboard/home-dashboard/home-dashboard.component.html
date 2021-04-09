@@ -1,0 +1,48 @@
+<app-loading *ngIf="loading == true"></app-loading>
+<div class="animated fadeIn mt-3" *ngIf="loading == false">
+    <h2 class="text-center mt-2 mb-2">Welcome to CRM</h2>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <h5 class="mt-2">Bills</h5>
+            <button type="button" [routerLink]="['/app/bills']" class="btn btn-block btn-secondary mb-2">View Bills</button>
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table mt-2 row-border hover">
+                <thead>
+                    <tr>
+                        <th>Bill ID</th>
+                        <th>Client ID</th>
+                        <th>Created at:</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="arrBills.length > 0">
+                    <tr *ngFor="let bills of arrBills">
+                        <td>{{ bills.client.id }}</td>
+                        <td>{{ bills.id }}</td>
+                        <td>{{ bills.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <h5 class="mt-2">Clients</h5>
+            <button type="button" [routerLink]="['/app/clients']" class="btn btn-block btn-secondary mb-2">View Clients</button>
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class=" table mt-2 row-border hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="arrClients.length > 0">
+                    <tr *ngFor="let clients of arrClients">
+                        <td>{{ clients.firstName }} {{ clients.lastName }}</td>
+                        <td>{{ clients.email }}</td>
+                        <td>{{ clients.phone }}</td>
+                        <td>{{ clients.country }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

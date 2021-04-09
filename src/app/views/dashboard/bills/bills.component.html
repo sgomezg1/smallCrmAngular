@@ -1,0 +1,60 @@
+<app-loading *ngIf="loading == true"></app-loading>
+<div class="animated fadeIn mt-3" *ngIf="loading == false">
+    <h2 class="text-center mt-2 mb-2" *ngIf="hideTitle == false">Bills</h2>
+    <app-bill-form (exitForm)="closeForm()" (returnForm)="sendHttpClientRequest($event)" *ngIf="showForm == true" [titleType]='titleType' [disableFields]="disableFormFields" [formData]="dataToForm"></app-bill-form>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success" role="alert" *ngIf="showSuccessAlert == true">
+                {{ serverMessage }}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="showErrorAlert == true">
+                {{ serverMessage }}
+            </div>
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table mt-2 row-border hover">
+                <thead>
+                    <tr>
+                        <th>Bill ID</th>
+                        <th>Client ID</th>
+                        <th>Date</th>
+                        <th>
+                            <button type="button" class="btn btn-secondary btn-block" (click)="openAddForm()">
+                                Add Bill
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="arrBills.length > 0">
+                    <tr *ngFor="let bill of arrBills">
+                        <td>{{ bill.id }}</td>
+                        <td>{{ bill.client.id }}</td>
+                        <td>{{ bill.date }}</td>
+                        <td>
+                            <div class="btn-group" dropdown>
+                                <button dropdownToggle type="button" class="btn btn-pill btn-secondary dropdown-toggle">
+                                  <i class="cil-options"></i>
+                                </button>
+                                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" (click)="getEditData(bill.id, 3)">Edit <i class="cis-comment-bubble-edit"></i></a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" (click)="getPreviewData(bill.id, 2)">Preview <i class="cis-eye"></i></a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" (click)="generatePdf(bill.id, bill.client.id, 1)">Generate bill PDF <i class="cis-file-pdf"></i></a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" (click)="generatePdf(bill.id, bill.client.id, 2)">Send bill to client mail <i class="cis-file-pdf"></i></a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a class="dropdown-item text-danger" (click)="deleteBill(bill.id)">Delete <i class="cis-trash-x"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-success fullwidth" *ngIf="successReg">Successful register. Please log in</div>
+                <div class="col-md-6 mx-auto">
+                    <div class="card mx-4">
+                        <div class="card-body p-4">
+                            <form [formGroup]="registerForm" (ngSubmit)="createUser()">
+                                <h1>Register</h1>
+                                <p class="text-muted">Create your account</p>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="First name" required formControlName="firstName">
+                                </div>
+                                <div *ngIf="invalidFirstName" class="alert alert-danger mt-2" role="alert">
+                                    First name required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Last name" required formControlName="lastName">
+                                </div>
+                                <div *ngIf="invalidLastName" class="alert alert-danger mt-2" role="alert">
+                                    Last name required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" required formControlName="email">
+                                </div>
+                                <div *ngIf="invalidEmail" class="alert alert-danger mt-2" role="alert">
+                                    Valid email address required required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Company name" required formControlName="companyName">
+                                </div>
+                                <div *ngIf="invalidCompanyName" class="alert alert-danger mt-2" role="alert">
+                                    Company name required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Country" required formControlName="country">
+                                </div>
+                                <div *ngIf="invalidCountry" class="alert alert-danger mt-2" role="alert">
+                                    Country required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="City" required formControlName="city">
+                                </div>
+                                <div *ngIf="invalidCity" class="alert alert-danger mt-2" role="alert">
+                                    City required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Address" required formControlName="address">
+                                </div>
+                                <div *ngIf="invalidAddress" class="alert alert-danger mt-2" role="alert">
+                                    Address required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Phone" required formControlName="phone">
+                                </div>
+                                <div *ngIf="invalidPhone" class="alert alert-danger mt-2" role="alert">
+                                    Phone required (Only numbers allowed)
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="zipCode" required formControlName="zipCode">
+                                </div>
+                                <div *ngIf="invalidzipCode" class="alert alert-danger mt-2" role="alert">
+                                    Zipcode required (Only numbers allowed)
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Bank name" required formControlName="bankName">
+                                </div>
+                                <div *ngIf="invalidBankName" class="alert alert-danger mt-2" role="alert">
+                                    Bank name required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="BIC" required formControlName="bic">
+                                </div>
+                                <div *ngIf="invalidBic" class="alert alert-danger mt-2" role="alert">
+                                    BIC required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Firmen Buch Nummer" required formControlName="firmenbuchnummer">
+                                </div>
+                                <div *ngIf="invalidBuch" class="alert alert-danger mt-2" role="alert">
+                                    Firmen buch nummer required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="IBAN" required formControlName="iban">
+                                </div>
+                                <div *ngIf="invalidIban" class="alert alert-danger mt-2" role="alert">
+                                    IBAN required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="UID" required formControlName="uid">
+                                </div>
+                                <div *ngIf="invalidUid" class="alert alert-danger mt-2" role="alert">
+                                    UID required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Username" required formControlName="username">
+                                </div>
+                                <div *ngIf="invalidUser" class="alert alert-danger mt-2" role="alert">
+                                    Username required
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Password" required formControlName="password">
+                                </div>
+                                <div *ngIf="invalidPass" class="alert alert-danger mt-2" role="alert">
+                                    Valid password required (numbers and chars required)
+                                </div>
+                                <div class="input-group mb-3">
+                                    <select class="form-control" id="role" required formControlName="roles">
+                                        <option value = "">-- Role --</option>
+                                        <option value = "admin">Admin</option>
+                                        <option value = "user">User</option>
+                                    </select>
+                                </div>
+                                <div *ngIf="invalidRole" class="alert alert-danger mt-2" role="alert">
+                                    Please choose a role
+                                </div>
+                                <button [ngClass]="{ 'disable_button': !registerForm.valid }" [disabled]="!registerForm.valid" type="submit" class="btn btn-block btn-success">
+                                    <span *ngIf = "loadingSubmit == false">Create Account</span>
+                                    <span *ngIf = "loadingSubmit == true">Loading... please wait</span>                                    
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

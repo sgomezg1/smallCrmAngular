@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-12">
+        <div [ngSwitch]="titleType">
+            <h3 *ngSwitchCase="1">Add Client</h3>
+            <h3 *ngSwitchCase="2">Preview Client</h3>
+            <h3 *ngSwitchCase="3">Edit Client</h3>
+        </div>
+        <form [formGroup]='clientForm' (ngSubmit)="returnData()" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col">
+                    <label for="firstName">First name</label>
+                    <input type="text" id="firstName" formControlName='firstName' class="form-control" placeholder="First name">
+                </div>
+                <div class="col">
+                    <label for="lastName">Last name</label>
+                    <input type="text" id="lastName" formControlName='lastName' class="form-control" placeholder="Last name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="mail" class="form-control" id="email" formControlName='email' placeholder="Email">
+                <div *ngIf="emailInvalid" class="alert alert-danger mt-2" role="alert">
+                    Valid email address required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" formControlName='phone' placeholder="Phone">
+                <div *ngIf="phoneInvalid" class="alert alert-danger mt-2" role="alert">
+                    Phone number required (Only numbers)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" formControlName='country' class="form-control" placeholder="Country">
+                    <div *ngIf="countryInvalid" class="alert alert-danger mt-2" role="alert">
+                        Country required
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="city">City</label>
+                    <input type="text" id="city" formControlName='city' class="form-control" placeholder="City">
+                    <div *ngIf="cityInvalid" class="alert alert-danger mt-2" role="alert">
+                        City required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" formControlName='address' class="form-control" placeholder="Address">
+                    <div *ngIf="addressInvalid" class="alert alert-danger mt-2" role="alert">
+                        Address required
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" id="zipCode" formControlName='zipCode' class="form-control" placeholder="Zip Code">
+                    <div *ngIf="zipCodeInvalid" class="alert alert-danger mt-2" role="alert">
+                        Zipcode required (Only numbers)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companyName">Company Name</label>
+                <input type="mail" class="form-control" id="companyName" formControlName='companyName' placeholder="Company name">
+                <div *ngIf="companyInvalid" class="alert alert-danger mt-2" role="alert">
+                    Company name required
+                </div>
+            </div>
+            <!--
+            <h5>Bills</h5>
+            <div class="form-check form-check-inline" *ngFor="let bill of bills; let i = index">
+                <input [disabled]="disableFields == true" [checked]="validBillCheck(bill.id) == true" (change)="pushBillControl(bill.id, i, $event)" class="form-check-input" type="checkbox" attr.id="bill_{{ bill.id  }}" [value]="bill.id">
+                <label class="form-check-label" attr.for="bill_{{bill.id}}">{{ bill.id }}</label>
+            </div>
+            -->
+            <div class="row mt-3 mb-3" *ngIf="titleType == 1 || titleType == 3">
+                <div class="col-lg-6 col-md-12">
+                    <button [ngClass]="{ 'disable_button': !clientForm.valid }" [disabled]="!clientForm.valid" type="submit" class="btn btn-block btn-dark">
+                        Submit
+                    </button>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <button (click)="returnCancel()" type="button" class="btn btn-block btn-secondary">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-3 mb-3" *ngIf="titleType == 2">
+                <div class="col">
+                    <button (click)="returnCancel()" type="button" class="btn btn-block btn-secondary">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

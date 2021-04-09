@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-12">
+        <div [ngSwitch]="titleType">
+            <h3 *ngSwitchCase="1">Add Client</h3>
+            <h3 *ngSwitchCase="2">Preview Client</h3>
+            <h3 *ngSwitchCase="3">Edit Client</h3>
+        </div>
+        <form [formGroup]='billForm' (ngSubmit)="returnData()" class="needs-validation" novalidate>
+            <div class="form-group" formGroupName="client">
+                <label for="client_id">Client id</label>
+                <select formControlName="id" id="client_id" class="form-control">
+                    <option value="">-- Select a client --</option>
+                    <option *ngFor = "let cli of arrClients" [value]="cli.id" [selected] = "billForm.get('client').get('id').value === cli.id">{{ cli.firstName }} {{ cli.lastName }}</option>
+
+                </select>
+                <div *ngIf="clientIdInvalid" class="alert alert-danger mt-2" role="alert">
+                    Please choose a client
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input [value]="billForm.get('date').value | date:'yyyy-MM-dd'" type="date" class="form-control" id="date" formControlName='date' placeholder="Date">
+                <div *ngIf="invalidDate" class="alert alert-danger mt-2" role="alert">
+                    Please select a date
+                </div>
+            </div>
+            <div class="row mt-3 mb-3" *ngIf="titleType == 1 || titleType == 3">
+                <div class="col-lg-6 col-md-12">
+                    <button [ngClass]="{ 'disable_button': !billForm.valid }" [disabled]="!billForm.valid" type="submit" class="btn btn-block btn-dark">
+                        Submit
+                    </button>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <button (click)="returnCancel()" type="button" class="btn btn-block btn-secondary">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-3 mb-3" *ngIf="titleType == 2">
+                <div class="col">
+                    <button (click)="returnCancel()" type="button" class="btn btn-block btn-secondary">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

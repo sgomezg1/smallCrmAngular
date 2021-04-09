@@ -1,0 +1,23 @@
+// If you want to override variables do it here
+@import "variables";
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+// If you want to add something do it here
+@import "custom";
+.form-control:disabled,
+.form-control[readonly] {
+    border: 1px solid #b2b2b2;
+}
+
+.desactivar_boton {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.red_color {
+    color: #f00000;
+}

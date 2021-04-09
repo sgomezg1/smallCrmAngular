@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-12">
+        <div [ngSwitch]="titleType">
+            <h3 *ngSwitchCase="1">Add User</h3>
+            <h3 *ngSwitchCase="2">Preview User</h3>
+            <h3 *ngSwitchCase="3">Edit User</h3>
+        </div>
+        <form [formGroup]='userForm' (ngSubmit)="returnData()" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-6">
+                    <label for="date">First Name</label>
+                    <input type="text" class="form-control" formControlName='firstName' placeholder="First name">
+                    <div *ngIf="invalidFirstName" class="alert alert-danger mt-2" role="alert">
+                        First name required
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="date">Last Name</label>
+                    <input type="text" class="form-control" formControlName='lastName' placeholder="Last name">
+                    <div *ngIf="invalidLastName" class="alert alert-danger mt-2" role="alert">
+                        Last name required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="date">Email</label>
+                    <input type="text" class="form-control" formControlName='email' placeholder="Email">
+                    <div *ngIf="invalidEmail" class="alert alert-danger mt-2" role="alert">
+                        Please insert a valid email
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="date">Phone</label>
+                    <input type="text" class="form-control" formControlName='phone' placeholder="Phone">
+                    <div *ngIf="invalidPhone" class="alert alert-danger mt-2" role="alert">
+                        Phone required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="date">Country</label>
+                    <input type="text" class="form-control" formControlName='country' placeholder="Country">
+                    <div *ngIf="invalidCountry" class="alert alert-danger mt-2" role="alert">
+                        Country required
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="date">City</label>
+                    <input type="text" class="form-control" formControlName='city' placeholder="City">
+                    <div *ngIf="invalidCity" class="alert alert-danger mt-2" role="alert">
+                        City required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Address</label>
+                <input type="text" class="form-control" formControlName='address' placeholder="Address">
+                <div *ngIf="invalidAddress" class="alert alert-danger mt-2" role="alert">
+                    Address required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Zipcode</label>
+                <input type="text" class="form-control" formControlName='zipCode' placeholder="Address">
+                <div *ngIf="invalidzipCode" class="alert alert-danger mt-2" role="alert">
+                    Zipcode required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Company Name</label>
+                <input type="text" class="form-control" formControlName='companyName' placeholder="Company Name">
+                <div *ngIf="invalidCompanyName" class="alert alert-danger mt-2" role="alert">
+                    Address required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Bank Name</label>
+                <input type="text" class="form-control" formControlName='bankName' placeholder="Bank Name">
+                <div *ngIf="invalidBankName" class="alert alert-danger mt-2" role="alert">
+                    Bank name required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">UId</label>
+                <input type="text" class="form-control" formControlName='uid' placeholder="UId">
+                <div *ngIf="invalidUid" class="alert alert-danger mt-2" role="alert">
+                    UId required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Iban</label>
+                <input type="text" class="form-control" formControlName='iban' placeholder="Iban">
+                <div *ngIf="invalidIban" class="alert alert-danger mt-2" role="alert">
+                    Iban required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">UId</label>
+                <input type="text" class="form-control" formControlName='uid' placeholder="UId">
+                <div *ngIf="invalidUid" class="alert alert-danger mt-2" role="alert">
+                    UId required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">BIC</label>
+                <input type="text" class="form-control" formControlName='bic' placeholder="BIC">
+                <div *ngIf="invalidUid" class="alert alert-danger mt-2" role="alert">
+                    BIC required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Firmen Buch Nummer</label>
+                <input type="text" class="form-control" formControlName='firmenbuchnummer' placeholder="Firmen Buch Nummer">
+                <div *ngIf="invalidBuch" class="alert alert-danger mt-2" role="alert">
+                    Firmen Buch Nummer required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Role</label>
+                <select class="form-control" id="role" required formControlName="roles">
+                    <option value = "">-- Role --</option>
+                    <option value = "admin" [selected] = "userForm.get('roles').value === 'admin'">Admin</option>
+                    <option value = "user" [selected] = "userForm.get('roles').value === 'user'">User</option>
+                </select>
+            </div>
+            <div class="form-group" *ngIf="titleType == 1">
+                <label for="date">Username</label>
+                <input type="text" class="form-control" formControlName='username' placeholder="Username">
+                <div *ngIf="invalidUser" class="alert alert-danger mt-2" role="alert">
+                    Username required
+                </div>
+            </div>
+            <div class="form-group" *ngIf="titleType == 1">
+                <label for="date">Password</label>
+                <input type="password" class="form-control" formControlName='password' placeholder="Password">
+                <div *ngIf="invalidPass" class="alert alert-danger mt-2" role="alert">
+                    Valid password required (numbers and chars required)
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-3" *ngIf="titleType == 1 || titleType == 3">
+                <div class="col-lg-6 col-md-12">
+                    <button [ngClass]="{ 'disable_button': !userForm.valid }" [disabled]="!userForm.valid" type="submit" class="btn btn-block btn-dark">
+                        Submit
+                    </button>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <button (click)="returnCancel()" type="button" class="btn btn-block btn-secondary">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-3 mb-3" *ngIf="titleType == 2">
+                <div class="col">
+                    <button (click)="returnCancel()" type="button" class="btn btn-block btn-secondary">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

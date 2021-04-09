@@ -1,0 +1,61 @@
+<app-loading *ngIf="loading == true"></app-loading>
+<div class="animated fadeIn mt-3" *ngIf="loading == false">
+    <h2 class="text-center mt-2 mb-2" *ngIf="hideTitle == false">Clients</h2>
+    <app-form (exitForm)="closeForm()" (returnForm)="sendHttpClientRequest($event)" *ngIf="showForm == true" [titleType]='titleType' [disableFields]="disableFormFields" [formData]="dataToForm"></app-form>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success" role="alert" *ngIf="showSuccessAlert == true">
+                {{ serverMessage }}
+            </div>
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table mt-2 row-border hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>
+                            <button type="button" class="btn btn-secondary btn-block" (click)="openAddForm()">
+                                Add Client
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="arrClientes.length > 0">
+                    <tr *ngFor="let cli of arrClientes">
+                        <td>{{ cli.firstName }} {{ cli.lastName }}</td>
+                        <td>{{ cli.email }}</td>
+                        <td>{{ cli.phone }}</td>
+                        <td>{{ cli.country }}</td>
+                        <td>{{ cli.companyName }}</td>
+                        <td>
+                            <b>Country:</b> {{ cli.country }}<br/>
+                            <b>City:</b> {{ cli.city }}<br/>
+                            <b>Address:</b> {{ cli.address }}
+                        </td>
+                        <td>
+                            <div class="btn-group" dropdown>
+                                <button dropdownToggle type="button" class="btn btn-pill btn-secondary dropdown-toggle">
+                                  <i class="cil-options"></i>
+                                </button>
+                                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" (click)="getEditData(cli.id, 3)">Edit <i class="cis-comment-bubble-edit"></i></a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a class="dropdown-item" (click)="getPreviewData(cli.id, 2)">Preview <i class="cis-eye"></i></a>
+                                    </li>
+                                    <li role="menuitem">
+                                        <a class="dropdown-item text-danger" (click)="deleteClient(cli.id)">Delete <i class="cis-trash-x"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
